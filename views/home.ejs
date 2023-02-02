@@ -207,7 +207,7 @@
   </section>
 
   <!--==================== POPULAR ====================-->
-  <section class="popular section" id="popular">
+  <section class="popular section" id="hot">
     <h2 class="section__title">
       Thế hệ mới - Đẳng cấp mới <br />
       AutoMazda
@@ -254,42 +254,6 @@
     </div>
   </section>
 
-  <!--==================== FEATURES ====================-->
-  <!-- <section class="features section">
-    <h2 class="section__title">More Features</h2>
-
-    <div class="features__container container grid">
-      <div class="features__group">
-        <img src="img/features.png" alt="" class="features__img" />
-
-        <div class="features__card features__card-1">
-          <h3 class="features__card-title">800v</h3>
-          <p class="features__card-description">
-            Turbo <br />
-            Chargin
-          </p>
-        </div>
-
-        <div class="features__card features__card-2">
-          <h3 class="features__card-title">350</h3>
-          <p class="features__card-description">
-            Km <br />
-            Range
-          </p>
-        </div>
-        <div class="features__card features__card-3">
-          <h3 class="features__card-title">480</h3>
-          <p class="features__card-description">
-            Km <br />
-            Travel
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <img src="img/map.svg" alt="" class="features__map" />
-  </section> -->
-
   <!--==================== FEATURED ====================-->
   <section class="featured section" id="featured">
     <h2 class="section__title">Khẳng định đẳng cấp cùng AutoMazda</h2>
@@ -328,7 +292,9 @@
         <article class="featured__card mix <%=car[i].filter%>">
           <div class="shape shape__smaller"></div>
 
-          <h1 class="featured__title"><%=car[i].name%></h1>
+          <a href="/<%=car[i].name%>"
+            ><h1 class="featured__title"><%=car[i].name%></h1></a
+          >
           <h3 class="featured__subtitle"><%=car[i].title%></h3>
           <img
             src="<%=car[i].img%>"

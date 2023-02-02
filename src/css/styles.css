@@ -872,6 +872,7 @@ img {
   width: 0.5rem;
   background-color: hsl(219, 4%, 16%);
   border-radius: 1rem;
+  height: 0.5rem;
 }
 
 ::-webkit-scrollbar-thumb {

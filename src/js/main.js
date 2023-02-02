@@ -74,10 +74,12 @@ btns.forEach((btn, i) => {
   });
 });
 
-setInterval(() => {
-  let index = Math.floor(Math.random() * btns.length);
-  sliderNav(index);
-}, 3000);
+if (btns.length != 0) {
+  setInterval(() => {
+    let index = Math.floor(Math.random() * btns.length);
+    sliderNav(index);
+  }, 3000);
+}
 
 /*=============== POPULAR SWIPER ===============*/
 
@@ -103,15 +105,17 @@ let swiperPopular = new Swiper(".popular__container", {
 });
 
 /*=============== MIXITUP FILTER FEATURED ===============*/
-
-let mixerFeatured = mixitup(".featured__content", {
-  selectors: {
-    target: ".featured__card",
-  },
-  animation: {
-    duration: 300,
-  },
-});
+const featuredCards = document.querySelectorAll(".featured__card");
+if (featuredCards.length > 0) {
+  let mixerFeatured = mixitup(".featured__content", {
+    selectors: {
+      target: ".featured__card",
+    },
+    animation: {
+      duration: 300,
+    },
+  });
+}
 
 /* Link active color featured */
 
