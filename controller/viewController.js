@@ -10,7 +10,17 @@ const carPage = (req, res) => {
   res.render("car", { promotion, car });
 };
 
+const createProduct = (req, res) => {
+  res.render("create-product")
+}
+
+const detailCarPage = (req, res) => {
+  res.render("detail-car")
+}
+
 module.exports = {
   homePage,
   carPage,
+  createProduct,
+  detailCarPage
 };
