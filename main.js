@@ -1,9 +1,15 @@
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
-const db = require("./config/database")
+const db = require("./config/database");
 const bodyParser = require("body-parser");
 var methodOverride = require("method-override");
-const { homePage, carPage, createProduct, detailCarPage } = require("./controller/viewController");
+const {
+  homePage,
+  carPage,
+  createProduct,
+  detailCarPage,
+  adminPage,
+} = require("./controller/viewController");
 const { sendMail } = require("./controller/mailController");
 
 const PORT = process.env.PORT || 3001;
@@ -23,6 +29,7 @@ app.set("view engine", "ejs");
 app.get("/", homePage);
 app.get("/add-product", createProduct);
 app.get("/detail-car", detailCarPage);
+app.get("/admin-page", adminPage);
 app.post("/mail", sendMail);
 app.get("/:name", carPage);
 

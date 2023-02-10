@@ -167,9 +167,8 @@ img {
   white-space: nowrap;
 }
 
-
 /* add product  */
-.builderBtn{
+.builderBtn {
   height: 100px;
   width: 100px;
   background: #b9b9b9;
@@ -177,65 +176,103 @@ img {
   border-color: #b9b9b9;
 }
 
-
-#result h1{
+#result h1 {
   font-size: 1.25rem;
   color: #903450;
   font-weight: 900;
-  margin-bottom: 1rem!important;
-  margin-top: 1rem!important;
-  text-align:left;
-  position:relative;
+  margin-bottom: 1rem !important;
+  margin-top: 1rem !important;
+  text-align: left;
+  position: relative;
 }
 
-#result p{
-  color: #fff!important;
-  font-size: 1rem!important;
+#result p {
+  color: #fff !important;
+  font-size: 1rem !important;
   text-shadow: 1px 1px 1px #86868685;
-  margin-top: .5em;
-  text-align:left;
-  position:relative;
+  margin-top: 0.5em;
+  text-align: left;
+  position: relative;
 }
 
-#result .closeBtn{
+#result .closeBtn {
   background-color: red;
   color: white;
-  width:30px;
-  height:30px;
+  width: 30px;
+  height: 30px;
   position: absolute;
-  top:0;
-  right:0%;
-  cursor:pointer;
+  top: 0;
+  right: 0%;
+  cursor: pointer;
   user-select: none;
   text-align: center;
   font-weight: 900;
 }
 
-.draggable{
+.draggable {
   cursor: move;
   /* border: 2px dotted #000; */
   padding: 4px;
-
 }
 
-.dragging{
+.dragging {
   /* border:5px solid black */
 }
 
-label input[type='file']{display:none}
+label input[type="file"] {
+  display: none;
+}
 
-.mkrelative{
-  position:relative
+.mkrelative {
+  position: relative;
 }
 
 .containerFeature {
-  border: 2px dotted #000; 
+  border: 2px dotted #000;
   padding: 4px;
-  min-height:70vh;
+  min-height: 70vh;
   background-color: #190222;
 }
 
-.grid12, .grid11, .grid10, .grid9, .grid8, .grid7, .grid6, .grid5, .grid4, .grid3, .grid2, .grid1{
-  min-height:10vh;
+.grid12,
+.grid11,
+.grid10,
+.grid9,
+.grid8,
+.grid7,
+.grid6,
+.grid5,
+.grid4,
+.grid3,
+.grid2,
+.grid1 {
+  min-height: 10vh;
   /* border: 2px dotted #000; */
+}
+
+.list-items {
+  list-style-type: none;
+}
+
+.item {
+  border: 0.5px solid rgb(186, 17, 209);
+  border-radius: 9px;
+  padding: 5px 7px;
+  width: 100%;
+  height: 7vmax;
+  cursor: pointer;
+  margin-bottom: 1vh;
+}
+.item:hover {
+  box-shadow: 1px 1px red;
+}
+
+.item .btn-close {
+  position: absolute;
+  margin: -1rem -1rem;
+}
+
+.item img {
+  height: 5vmax;
+  width: auto;
 }

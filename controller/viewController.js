@@ -6,21 +6,24 @@ const homePage = (req, res) => {
 };
 
 const carPage = (req, res) => {
-  console.log(req.params);
   res.render("car", { promotion, car });
 };
 
+const adminPage = (req, res) => {
+  res.render("admin");
+};
 const createProduct = (req, res) => {
-  res.render("create-product")
-}
+  res.render("create-product");
+};
 
 const detailCarPage = (req, res) => {
-  res.render("detail-car")
-}
+  res.render("detail-car");
+};
 
 module.exports = {
   homePage,
   carPage,
   createProduct,
-  detailCarPage
+  detailCarPage,
+  adminPage,
 };
