@@ -1,0 +1,13 @@
+<main class="main container">
+  <form action="/admin-page/login" id="login-form" method="POST">
+    <input type="text" name="username" id="" value="admin" hidden />
+    <input type="password" name="password" id="input-password" hidden />
+  </form>
+  <script>
+    let password = prompt("Please enter password");
+    if (password != null) {
+      document.getElementById("input-password").setAttribute("value", password);
+      document.getElementById("login-form").submit();
+    }
+  </script>
+</main>

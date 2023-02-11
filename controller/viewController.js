@@ -2,6 +2,7 @@ const promotion = require("../data/promotion");
 const car = require("../data/car");
 
 const homePage = (req, res) => {
+  console.log(req.user);
   res.render("home", { promotion, car });
 };
 
@@ -20,10 +21,14 @@ const detailCarPage = (req, res) => {
   res.render("detail-car");
 };
 
+const loginPage = (req, res) => {
+  res.render("login");
+};
 module.exports = {
   homePage,
   carPage,
   createProduct,
   detailCarPage,
   adminPage,
+  loginPage,
 };
