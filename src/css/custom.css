@@ -262,9 +262,12 @@ label input[type="file"] {
   height: 7vmax;
   cursor: pointer;
   margin-bottom: 1vh;
+  transition: height 2s;
 }
 .item:hover {
   box-shadow: 1px 1px red;
+  position: relative;
+  bottom: 2px;
 }
 
 .item .btn-close {
