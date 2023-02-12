@@ -3,6 +3,7 @@ const expressLayouts = require("express-ejs-layouts");
 const db = require("./config/database");
 const bodyParser = require("body-parser");
 var methodOverride = require("method-override");
+const upload = require("./middleware/uploadMidd");
 require("dotenv").config();
 const {
   homePage,
@@ -10,6 +11,11 @@ const {
   createProduct,
   detailCarPage,
   adminPage,
+  deleteCar,
+  editCar,
+  editSaveCar,
+  createCar,
+  saveNewCar
 } = require("./controller/viewController");
 const { sendMail } = require("./controller/mailController");
 
@@ -36,6 +42,13 @@ app.get("/admin-page", adminPage);
 app.post("/mail", sendMail);
 app.get("/:name", carPage);
 app.get("/add/:name/", carPage);
+app.delete("/delete/:id/", deleteCar);
+app.get("/edit/:id", editCar);
+app.put("/save/info/:id",upload.single('img'), editSaveCar);
+app.get("/create/car", createCar);
+app.post("/save/newcar/", upload.single('img'), saveNewCar)
+
+
 
 app.listen(PORT, () => {
   console.log(`✅Server start successfull at port ${PORT}`);

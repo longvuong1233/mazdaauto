@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 var mongooseDelete = require("mongoose-delete");
 const RenderDetailCar = new Schema(
   {
-   idCar: { type: Schema.Types.ObjectId, ref: "Car", required: true },
+   //idCar: { type: Schema.Types.ObjectId, ref: "Car", required: true },
    textNode: {
     type: [Object]
    }
