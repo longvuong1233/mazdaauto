@@ -2,7 +2,8 @@ const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const db = require("./config/database");
 const bodyParser = require("body-parser");
-const methodOverride = require("method-override");
+var methodOverride = require("method-override");
+const upload = require("./middleware/uploadMidd");
 const passport = require("./middleware/passportConfig");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
@@ -15,7 +16,12 @@ const {
   createProduct,
   detailCarPage,
   adminPage,
-  loginPage,
+  deleteCar,
+  editCar,
+  editSaveCar,
+  createCar,
+  saveNewCar,
+  loginPage
 } = require("./controller/viewController");
 const { sendMail } = require("./controller/mailController");
 
@@ -54,6 +60,11 @@ app.get("/detail-car", detailCarPage);
 app.post("/mail", sendMail);
 app.get("/car/:name", carPage);
 app.get("/add/:name/", carPage);
+app.delete("/delete/:id/", deleteCar);
+app.get("/edit/:id", editCar);
+app.put("/save/info/:id",upload.single('img'), editSaveCar);
+app.get("/create/car", createCar);
+app.post("/save/newcar/", upload.single('img'), saveNewCar)
 app.get("/admin-page/login", loginPage);
 app.post(
   "/admin-page/login",

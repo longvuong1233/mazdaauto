@@ -8,7 +8,7 @@ const Car = new Schema(
     length: { type: String, maxLength: 255 },
     fuel: { type: String, maxLength: 255 },
     performance: { type: String, maxLength: 255 },
-    img: { type: String, maxLength: 255 },
+    img: { type: String },
     price: { type: String, maxLength: 255 },
     filter: { type: String, maxLength: 255 },
   },
