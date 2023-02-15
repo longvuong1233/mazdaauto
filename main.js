@@ -3,10 +3,10 @@ const expressLayouts = require("express-ejs-layouts");
 const db = require("./config/database");
 const bodyParser = require("body-parser");
 var methodOverride = require("method-override");
-const upload = require("./middleware/uploadMidd");
 const passport = require("./middleware/passportConfig");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const route = require("./route/index")
 
 const SQLiteStore = require("connect-sqlite3")(session);
 require("dotenv").config();
@@ -28,7 +28,8 @@ const { sendMail } = require("./controller/mailController");
 const PORT = process.env.PORT || 3001;
 const app = express();
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(expressLayouts);
 app.use(express.static("src"));
 console.log(__dirname);
@@ -53,19 +54,8 @@ app.set("src/video", "video");
 app.set("src/css", "css");
 app.set("view engine", "ejs");
 
-app.get("/", homePage);
-app.get("/add-product", createProduct);
-app.get("/detail-car", detailCarPage);
+route(app);
 
-app.post("/mail", sendMail);
-app.get("/car/:name", carPage);
-app.get("/add/:name/", carPage);
-app.delete("/delete/:id/", deleteCar);
-app.get("/edit/:id", editCar);
-app.put("/save/info/:id",upload.single('img'), editSaveCar);
-app.get("/create/car", createCar);
-app.post("/save/newcar/", upload.single('img'), saveNewCar)
-app.get("/admin-page/login", loginPage);
 app.post(
   "/admin-page/login",
   passport.authenticate("local", {
@@ -82,7 +72,6 @@ app.use((req, res, next) => {
     next();
   }
 });
-app.get("/admin-page", adminPage);
 
 app.listen(PORT, () => {
   console.log(`✅ Server start successfull at port ${PORT}`);

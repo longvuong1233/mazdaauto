@@ -1,7 +1,9 @@
 const promotion = require("../data/promotion");
 const car = require("../data/car");
 const Car = require("../models/car");
-const fs = require("fs");
+const cloudinary = require('cloudinary').v2;
+
+
 const homePage = (req, res) => {
   console.log(req.user);
   res.render("home", { promotion, car });
@@ -66,7 +68,7 @@ const editSaveCar = (req, res, next) => {
     }
   )
     .then(() => {
-      res.redirect("/admin-page");
+      res.redirect("/admin-page/");
     })
     .catch(next);
 };
@@ -75,11 +77,20 @@ const createCar = (req, res) => {
   res.render("create-car");
 };
 
-const saveNewCar = (req, res) => {
-  const { name, title, length, fuel, performance, price, filter } = req.body;
-  const img = req.file.originalname;
+const saveNewCar = async (req, res) => {
+  let { name, title, length, fuel, performance, price, filter, img, detailInfo } = req.body;
+  var imgResult;
+cloudinary.config({
+  cloud_name: "ddxxozy4t",
+  api_key: "842729965617165",
+  api_secret: "YTxKzPr0nJXuorHAj0r8Kyrkg9U"
+});
 
-  const car = new Car({
+await cloudinary.uploader.upload(img, (error, result)=>{
+   img = result.secure_url;
+});
+console.log("img", img);
+  const car = await new Car({
     name,
     title,
     length,
@@ -88,11 +99,13 @@ const saveNewCar = (req, res) => {
     price,
     filter,
     img,
+    detailInfo
   });
+  //console.log(car);
   car
     .save()
-    .then(() => res.redirect("/admin-page"))
-    .catch((error) => {});
+    .then(() => res.redirect("/admin-page/"))
+    .catch((error) => {console.log(error);});
 };
 module.exports = {
   homePage,

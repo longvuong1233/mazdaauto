@@ -11,12 +11,46 @@
     })
 
     // Click Button Save
+    var imgVal;
     $('#saveInfo').click(function() {
     $('.closeBtn').remove();
     $('label').remove();
-
-    const elm = document.querySelector('#result'); 
-    console.log(elm);
+    var nameVal = $('input[name=name]').val();
+    var titleVal = $('input[name=title]').val();
+    var lengthVal = $('input[name=length]').val();
+    var fuelVal = $('input[name=fuel]').val();
+    var performanceVal = $('input[name=perfomance]').val();
+    var priceVal = $('input[name=price]').val();
+    var filterVal = $('input[name=filter]').val();
+    var elm = document.querySelector('#result'); 
+    var elmVal = elm.outerHTML
+    var detailInfo
+    var objValue = {
+        name: nameVal,
+        title: titleVal,
+        length: lengthVal,
+        fuel: fuelVal,
+        perfomance: performanceVal,
+        price: priceVal,
+        filter:filterVal,
+        img: imgVal,
+        detailInfo: elmVal,
+    }
+    //Call api save new car
+    fetch("/admin-page/save/newCar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(objValue),
+      })
+        .then((response) => response.json())
+        .then((responseData) => {
+          console.log("Response from server:", responseData);
+        })
+        .catch((error) => {
+          console.error("Error sending data to server:", error);
+        });
 })
     
     $('#imgWithText').click(function () {
@@ -110,12 +144,14 @@ function UploadAndPreview(e){
     
     var mycurrentimage =  e.parentElement.nextElementSibling.nextElementSibling;  
     var myinputfield = e.files[0]; 
-    console.log(mycurrentimage)
+   
     var reader = new FileReader(); 
     reader.onload = function(){
     if(reader.readyState = "complete"){
     mycurrentimage.src = reader.result;
+     imgVal = reader.result
     } 
     } 
-    reader.readAsDataURL(myinputfield);
+  reader.readAsDataURL(myinputfield);
+   
     }
