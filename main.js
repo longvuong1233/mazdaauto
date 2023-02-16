@@ -6,7 +6,7 @@ var methodOverride = require("method-override");
 const passport = require("./middleware/passportConfig");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
-const route = require("./route/index")
+const route = require("./route/index");
 
 const SQLiteStore = require("connect-sqlite3")(session);
 require("dotenv").config();
@@ -21,15 +21,15 @@ const {
   editSaveCar,
   createCar,
   saveNewCar,
-  loginPage
+  loginPage,
 } = require("./controller/viewController");
 const { sendMail } = require("./controller/mailController");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
 app.use(cookieParser());
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(expressLayouts);
 app.use(express.static("src"));
 console.log(__dirname);
@@ -55,23 +55,6 @@ app.set("src/css", "css");
 app.set("view engine", "ejs");
 
 route(app);
-
-app.post(
-  "/admin-page/login",
-  passport.authenticate("local", {
-    successRedirect: "/admin-page",
-    failureRedirect: "/",
-  })
-);
-
-//admin router
-app.use((req, res, next) => {
-  if (req.user != "admin") {
-    res.redirect("/");
-  } else {
-    next();
-  }
-});
 
 app.listen(PORT, () => {
   console.log(`✅ Server start successfull at port ${PORT}`);
