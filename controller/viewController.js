@@ -43,18 +43,28 @@ const editCar = (req, res, next) => {
   });
 };
 
-const editSaveCar = (req, res, next) => {
-  var imgRich;
-  Car.findOne({ _id: req.params.id }).then((car) => {
-    imgRich = car.img;
+const editSaveCar = async(req, res, next) => {
+  let imgRich;
+  await Car.findOne({ _id: req.params.id }).then((car) => {
+     imgRich = car.img
   });
-  //test
-
-  const img = req.file.originalname;
-
-  const { name, title, length, fuel, performance, price, filter } = req.body;
-
-  Car.updateOne(
+   
+ let { name, title, length, fuel, performance, price, filter, img, detailInfo } = req.body;
+  if(img) {
+    cloudinary.config({
+      cloud_name: "ddxxozy4t",
+      api_key: "842729965617165",
+      api_secret: "YTxKzPr0nJXuorHAj0r8Kyrkg9U"
+    });
+    
+    await cloudinary.uploader.upload(img, (error, result)=>{
+       img = result.secure_url;
+    });
+  } else {
+    img = imgRich
+  }
+      
+  await Car.updateOne(
     { _id: req.params.id },
     {
       name,
@@ -65,6 +75,7 @@ const editSaveCar = (req, res, next) => {
       price,
       filter,
       img,
+      detailInfo
     }
   )
     .then(() => {
@@ -89,7 +100,6 @@ cloudinary.config({
 await cloudinary.uploader.upload(img, (error, result)=>{
    img = result.secure_url;
 });
-console.log("img", img);
   const car = await new Car({
     name,
     title,
@@ -101,7 +111,6 @@ console.log("img", img);
     img,
     detailInfo
   });
-  //console.log(car);
   car
     .save()
     .then(() => res.redirect("/admin-page/"))
