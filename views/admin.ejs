@@ -2,7 +2,7 @@
   <section class="list-cars section" id="list-cars">
     <div>
       <div class="d-flex justify-content-end py-2">
-        <a href="/create/car">
+        <a href="/admin-page/create/car">
            <button class="btn btn-success">Thêm xe mới</button>
         </a>
        
@@ -12,11 +12,13 @@
         <li class="item">
           <td><a href=""><button type="button" class="btn btn-danger btn-restore" data-id="<%= car[i]._id %>" style="width:100px"><span class="oi oi-share-boxed"></span>Delete</button></a></td>
           <!-- <td><a><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-course-modal" data-bs-whatever="<%= car[i]._id %>"><span class="oi oi-delete"></span> Xóa</button></a></td>   -->
-          <td><a href="/edit/<%= car[i]._id %>"><button type="button" class="btn btn-success btn-restore" ><span class="oi oi-share-boxed"></span>Edit</button></a></td>
-         
-          <div class="d-flex justify-content-start">
-            <img src="" alt="img" />
+          <td><a href="/admin-page/edit/<%= car[i]._id %>"><button type="button" class="btn btn-success" ><span class="oi oi-share-boxed"></span>Edit</button></a></td>
+         <br/>
+          <div class="d-flex justify-content-end img-text-car" >
             <p><%= car[i].name %></p>
+            <img src="<%= car[i].img %>" alt="img" style="height: 80px;" />
+            <br/>
+          
           </div>
         </li>
        <% } %>
@@ -51,8 +53,8 @@
             var courseId;
             var btnDeleteCourse = document.getElementById('delete');
           //   var formDelete = document.forms['delete-form']; 
-          //   var btnRestore = $('.btn-restore');
-          //   var formRestore = document.forms['restore-form'];
+            var btnRestore = $('.btn-restore');
+            var formRestore = document.forms['restore-form'];
           //  var deleteModal = document.getElementById("delete-course-modal")
            $('#delete-course-modal').on('show.bs.modal', function (event) {
                                     var button = $(event.relatedTarget) 
@@ -62,16 +64,16 @@
 
   
 });
-          //  btnRestore.click(function(e){
-          //    e.preventDefault();
-          //    var btnIdRestore = $(this).data('id');
-          //   formRestore.action = '/delete/' + btnIdRestore + '?_method=DELETE';
-          //   formRestore.submit();
+           btnRestore.click(function(e){
+             e.preventDefault();
+             var btnIdRestore = $(this).data('id');
+            formRestore.action = '/admin-page/' + 'delete/' + btnIdRestore + '?_method=DELETE';
+            formRestore.submit();
 
-          //  }) 
+           }) 
                        
           btnDeleteCourse.onclick = function() {
-            console.log(courseId);
+            
             //  formDelete.action = '/products/' + courseId + '/force?_method=DELETE';
             //  formDelete.submit();
           }

@@ -1139,3 +1139,13 @@ img {
 .disabled-class {
   display: none;
 }
+
+/* hello */
+.img-text-car {
+  margin-top: -30px;
+}
+
+.img-text-car p {
+  margin-right: 20px;
+  margin-top: 20px;
+}

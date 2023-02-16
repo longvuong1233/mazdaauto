@@ -11,6 +11,9 @@ const Car = new Schema(
     img: { type: String },
     price: { type: String, maxLength: 255 },
     filter: { type: String, maxLength: 255 },
+    detailInfo: { type: String },
+
+    
   },
   {
     timestamps: true,

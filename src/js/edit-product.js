@@ -1,4 +1,15 @@
-    // Click Button Heading
+//detail info
+const pathArray = window.location.pathname.split('/');
+const idCarFromUrl = pathArray[pathArray.length - 1];
+var detailInfo = $('input[name=detailInfo]').val();
+
+console.log(detailInfo);
+$('#result').append(detailInfo)
+const heading = document.querySelector('#heading');
+const paragraph = document.querySelector('#paragraph');
+paragraph.insertAdjacentHTML('beforeend', '<span class="closeBtn">x</span>');
+heading.insertAdjacentHTML('beforeend', '<span class="closeBtn">x</span>');
+// Click Button Heading
     $('#heading').click(function () {
       $('#result').append('<h1 class="draggable" id ="heading" contenteditable="true" draggable="true"><b>Heading</b><span class="closeBtn">x</span></h1>')
       dragWork()
@@ -24,6 +35,7 @@
     var filterVal = $('input[name=filter]').val();
     var elm = document.querySelector('#result'); 
     var elmVal = elm.outerHTML
+
     var detailInfo
     var objValue = {
         name: nameVal,
@@ -36,9 +48,10 @@
         img: imgVal,
         detailInfo: elmVal,
     }
-    //Call api save new car
-    fetch("/admin-page/save/newCar", {
-        method: "POST",
+    // console.log(objValue);
+    // //Call api save new car
+    fetch(`/admin-page/save/info/${idCarFromUrl}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -81,7 +94,7 @@
 
  
       // Result append
-      $('#result').append(customHTML)
+      // $('#result').append(detailInfo)
       dragWork()
     })
 
