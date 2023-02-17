@@ -11,7 +11,7 @@
       <% for (var i = 0; i < car.length; i++) { %>  
         <li class="item">
           <td><a href=""><button type="button" class="btn btn-danger btn-restore" data-id="<%= car[i]._id %>" style="width:100px"><span class="oi oi-share-boxed"></span>Delete</button></a></td>
-          <!-- <td><a><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-course-modal" data-bs-whatever="<%= car[i]._id %>"><span class="oi oi-delete"></span> Xóa</button></a></td>   -->
+          <td><a href="/admin-page/list/singleCar/<%= car[i]._id %>"><button type="button" class="btn btn-danger"></span> List Image</button></a></td>  
           <td><a href="/admin-page/edit/<%= car[i]._id %>"><button type="button" class="btn btn-success" ><span class="oi oi-share-boxed"></span>Edit</button></a></td>
          <br/>
           <div class="d-flex justify-content-end img-text-car" >

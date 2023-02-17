@@ -1,16 +1,33 @@
-//detail info
+    // detail info
 const pathArray = window.location.pathname.split('/');
 const idCarFromUrl = pathArray[pathArray.length - 1];
 var detailInfo = $('input[name=detailInfo]').val();
+$('#result-2').append(detailInfo)
 
-console.log(detailInfo);
-$('#result').append(detailInfo)
-const heading = document.querySelector('#heading');
-const paragraph = document.querySelector('#paragraph');
-paragraph.insertAdjacentHTML('beforeend', '<span class="closeBtn">x</span>');
-heading.insertAdjacentHTML('beforeend', '<span class="closeBtn">x</span>');
-// Click Button Heading
-    $('#heading').click(function () {
+    const headingg = document.querySelector('#heading');
+    const paragraphg = document.querySelector('#paragraph');
+    const imgDrag = document.querySelector('.mkrelative')
+    const col4 = document.querySelectorAll('.col-sm-4')
+    if(col4) {
+      col4.forEach((col) => {
+        col.insertAdjacentHTML('beforeend', `<label for="in1" class="btn btn-success"> Upload
+        <input id="in1" type="file" data-res='1' onchange="UploadAndPreview(this)">
+    </label><br/>`);
+      })
+    }
+   
+   
+    
+
+//
+   if(imgDrag){
+    imgDrag.insertAdjacentHTML('beforeend', '<span class="closeBtn">x</span>');
+   }
+    
+    paragraphg.insertAdjacentHTML('beforeend', '<span class="closeBtn">x</span>');
+    headingg.insertAdjacentHTML('beforeend', '<span class="closeBtn">x</span>');
+    // Click Button Heading
+    $('#heading-2').click('.draggable',function () {
       $('#result').append('<h1 class="draggable" id ="heading" contenteditable="true" draggable="true"><b>Heading</b><span class="closeBtn">x</span></h1>')
       dragWork()
     })
@@ -20,7 +37,7 @@ heading.insertAdjacentHTML('beforeend', '<span class="closeBtn">x</span>');
       $('#result').append('<p class="draggable" id="paragraph"  contenteditable="true" draggable="true"><b id="paragraphText">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque eos unde excepturi nihil sequi quos nemo. At quam veniam sint ullam placeat amet laudantium facere neque recusandae adipisci minus fugit voluptatum corporis vero nihil quae, soluta aperiam dignissimos, consequatur ipsum doloribus nisi exercitationem, totam saepe. Excepturi facilis laborum asperiores odio odit, nam sint incidunt quos doloremque quidem officia accusamus. Architecto voluptates autem itaque accusantium soluta, ut repellat ullam voluptatem doloremque doloribus explicabo nam numquam perspiciatis facere eveniet odit saepe. Praesentium ex vero minima odit deleniti neque, dolorum repellat molestiae facere ut doloremque distinctio voluptates, dicta quas, eum nostrum perspiciatis ad!</b><span class="closeBtn">x</span></p>')
       dragWork()
     })
-
+    
     // Click Button Save
     var imgVal;
     $('#saveInfo').click(function() {
@@ -35,7 +52,6 @@ heading.insertAdjacentHTML('beforeend', '<span class="closeBtn">x</span>');
     var filterVal = $('input[name=filter]').val();
     var elm = document.querySelector('#result'); 
     var elmVal = elm.outerHTML
-
     var detailInfo
     var objValue = {
         name: nameVal,
@@ -48,10 +64,10 @@ heading.insertAdjacentHTML('beforeend', '<span class="closeBtn">x</span>');
         img: imgVal,
         detailInfo: elmVal,
     }
-    // console.log(objValue);
-    // //Call api save new car
-    fetch(`/admin-page/save/info/${idCarFromUrl}`, {
-        method: "PUT",
+    
+    //Call api save new car
+    fetch("/admin-page/save/newCar", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
@@ -94,7 +110,7 @@ heading.insertAdjacentHTML('beforeend', '<span class="closeBtn">x</span>');
 
  
       // Result append
-      // $('#result').append(detailInfo)
+      $('#result').append(customHTML)
       dragWork()
     })
 
@@ -110,7 +126,8 @@ var resultSave = document.getElementById('saveInfo');
 
 function dragWork(){
 
-draggable = document.querySelectorAll('.draggable'); 
+draggable = document.querySelectorAll('.draggable');
+
 
 draggable.forEach((dragEl) => {
     dragEl.addEventListener('dragstart', () => {

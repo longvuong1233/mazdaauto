@@ -13,10 +13,14 @@ const carPage = (req, res) => {
   res.render("car", { promotion, car });
 };
 
-const adminPage = (req, res) => {
-  Car.find().then((car) => {
-    res.render("admin", { car });
-  });
+const adminPage = async (req, res) => {
+  try {
+    const car = await Car.find();
+    return res.render("admin", { car });
+  } catch (error) {
+    console.error('Error while finding cars:', error.message);
+    throw error;
+  }
 };
 const createProduct = (req, res) => {
   res.render("create-product");
@@ -29,13 +33,15 @@ const detailCarPage = (req, res) => {
 const loginPage = (req, res) => {
   res.render("login");
 };
-const deleteCar = (req, res, next) => {
-  Car.delete({ _id: req.params.id })
-    .then(() => {
-      res.redirect("back");
-    })
-    .catch(next);
+const deleteCar = async (req, res, next) => {
+  try {
+    await Car.delete({ _id: req.params.id}).exec();
+    res.redirect("back")
+  } catch (error) {
+    next(err);
+  }
 };
+
 
 const editCar = (req, res, next) => {
   Car.findOne({ _id: req.params.id }).then((car) => {
@@ -111,11 +117,39 @@ await cloudinary.uploader.upload(img, (error, result)=>{
     img,
     detailInfo
   });
-  car
+  await car
     .save()
-    .then(() => res.redirect("/admin-page/"))
+    .then(() =>  res.redirect("/"))
     .catch((error) => {console.log(error);});
 };
+
+  
+const listSingleCar = async(req,res) => { 
+   const carImg = await  Car.findOne({_id: req.params.id})
+   var arrImg = []
+   if(carImg) {
+    const a = carImg.detailInfo;
+    const regex = /<img[^>]+>/g;
+    const imgTags = a.match(regex);
+     imgTags.map((img) => {
+        var arr = []
+        const regex2 = /<img[^>]+src="([^">]+)"/g;
+        const matches = img.match(regex2);
+        const srcs = matches.map((match) => match.replace(/<img[^>]+src="|"/g, ''));
+        const srcStr = srcs.toString()
+        arr.push(srcStr)
+        arrImg.push(arr)
+        const imgResult = arrImg.flat(1)
+        imgResult.push(carImg.img);
+        return imgResult;
+     }) 
+   } else {
+     arrImg.push(carImg.img)
+     return arrImg;
+   }
+   
+}
+
 module.exports = {
   homePage,
   carPage,
@@ -128,4 +162,5 @@ module.exports = {
   editSaveCar,
   createCar,
   saveNewCar,
+  listSingleCar
 };

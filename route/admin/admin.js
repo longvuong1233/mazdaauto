@@ -27,6 +27,8 @@ router.get("/edit/:id", viewController.editCar);
 router.put("/save/info/:id", viewController.editSaveCar);
 router.get("/create/car", viewController.createCar);
 router.post("/save/newCar", viewController.saveNewCar);
+router.get("/list/singleCar/:id", viewController.listSingleCar);
+
 
 //Send mail
 router.post("/mail", mailController.sendMail);

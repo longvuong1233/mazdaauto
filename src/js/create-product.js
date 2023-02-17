@@ -11,7 +11,7 @@
     })
 
     // Click Button Save
-    var imgVal;
+    var imgResult;
     $('#saveInfo').click(function() {
     $('.closeBtn').remove();
     $('label').remove();
@@ -33,9 +33,10 @@
         perfomance: performanceVal,
         price: priceVal,
         filter:filterVal,
-        img: imgVal,
+        img: imgResult,
         detailInfo: elmVal,
     }
+
     //Call api save new car
     fetch("/admin-page/save/newCar", {
         method: "POST",
@@ -140,18 +141,39 @@ function getTheDragElement(y) {
 
 // ############### upload and preview image ##########
 
-function UploadAndPreview(e){ 
+ function UploadAndPreview(e){ 
     
     var mycurrentimage =  e.parentElement.nextElementSibling.nextElementSibling;  
     var myinputfield = e.files[0]; 
+    // mycurrentimage.src = reader.result;
    
     var reader = new FileReader(); 
     reader.onload = function(){
     if(reader.readyState = "complete"){
-    mycurrentimage.src = reader.result;
-     imgVal = reader.result
+      var imgVal = reader.result
+      console.log("abc");
+      //const file = fileInput.files[0];
+      const formData = new FormData();
+      formData.append('file', imgVal);
+      formData.append('upload_preset', 'bookingapp');
+      formData.append('cloud_name', 'devat-channel');
+    
+      fetch(`https://api.cloudinary.com/v1_1/ddxxozy4t/image/upload`, {
+        method: 'POST',
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+        
+         mycurrentimage.src = data.secure_url;
+         imgResult = data.secure_url
+
+        })
+        .catch((error) => console.error(error));
+    }
+   
     } 
-    } 
-  reader.readAsDataURL(myinputfield);
+    
+    reader.readAsDataURL(myinputfield);
    
     }
