@@ -10,21 +10,20 @@ $('#result-2').append(detailInfo)
     const col4 = document.querySelectorAll('.col-sm-4')
     if(col4) {
       col4.forEach((col) => {
-        col.insertAdjacentHTML('beforeend', `<label for="in1" class="btn btn-success"> Upload
-        <input id="in1" type="file" data-res='1' onchange="UploadAndPreview(this)">
+        col.insertAdjacentHTML('beforeend', `<label class="btn btn-success"> Upload
+        <input type="file" data-res='1' onchange="UploadAndPreview(this)">
     </label><br/>`);
       })
     }
    
-   
-    
-
 //
    if(imgDrag){
     imgDrag.insertAdjacentHTML('beforeend', '<span class="closeBtn">x</span>');
    }
-    
+   if(paragraphg) {
     paragraphg.insertAdjacentHTML('beforeend', '<span class="closeBtn">x</span>');
+
+   }
     headingg.insertAdjacentHTML('beforeend', '<span class="closeBtn">x</span>');
     // Click Button Heading
     $('#heading-2').click('.draggable',function () {
@@ -86,20 +85,20 @@ $('#result-2').append(detailInfo)
       customHTML = ` <div class='draggable mkrelative' draggable="true" >
             <div class="row">
             <div class='col-sm-4'>
-                <label for="in1" class="btn btn-success"> Upload
-                    <input id="in1" type="file" data-res='1' onchange="UploadAndPreview(this)">
+                <label class="btn btn-success"> Upload
+                    <input  type="file" data-res='1' onchange="UploadAndPreview(this)">
                 </label><br>
                 <img src="images/upload.jpg" id="" class="img-responsive" height="250px" width="250px">             
             </div>
             <div class='col-sm-4'>
-                <label for="in2" class="btn btn-success"> Upload
-                <input id="in2" type="file" data-res='2' onchange="UploadAndPreview(this)">
+                <label class="btn btn-success"> Upload
+                <input  type="file" data-res='2' onchange="UploadAndPreview(this)">
                 </label><br>
                 <img src="images/upload.jpg" id="" class="img-responsive" height="250px" width="250px">
                 </div>
             <div class='col-sm-4'>
-            <label for="in3" class="btn btn-success"> Upload
-                <input id="in3" type="file" data-res='2' onchange="UploadAndPreview(this)">
+            <label  class="btn btn-success"> Upload
+                <input  type="file" data-res='2' onchange="UploadAndPreview(this)">
             </label><br>
             <img src="images/upload.jpg" id="" class="img-responsive" height="250px" width="250px">
             </div>
