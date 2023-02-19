@@ -65,20 +65,18 @@ $('#result-2').append(detailInfo)
     }
     
     //Call api save new car
-    fetch("/admin-page/save/newCar", {
-        method: "POST",
+    fetch(`/admin-page/save/info/${idCarFromUrl}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(objValue),
+      }).then(() => {
+        window.location.href = "/admin-page";
+      }).catch((err) => {
+         alert(err)
       })
-        .then((response) => response.json())
-        .then((responseData) => {
-          console.log("Response from server:", responseData);
-        })
-        .catch((error) => {
-          console.error("Error sending data to server:", error);
-        });
+        
 })
     
     $('#imgWithText').click(function () {
@@ -88,20 +86,9 @@ $('#result-2').append(detailInfo)
                 <label class="btn btn-success"> Upload
                     <input  type="file" data-res='1' onchange="UploadAndPreview(this)">
                 </label><br>
-                <img src="images/upload.jpg" id="" class="img-responsive" height="250px" width="250px">             
+                <img src="" id="" alt="Just Choose Image" class="img-responsive" height="450px" width="450px">             
             </div>
-            <div class='col-sm-4'>
-                <label class="btn btn-success"> Upload
-                <input  type="file" data-res='2' onchange="UploadAndPreview(this)">
-                </label><br>
-                <img src="images/upload.jpg" id="" class="img-responsive" height="250px" width="250px">
-                </div>
-            <div class='col-sm-4'>
-            <label  class="btn btn-success"> Upload
-                <input  type="file" data-res='2' onchange="UploadAndPreview(this)">
-            </label><br>
-            <img src="images/upload.jpg" id="" class="img-responsive" height="250px" width="250px">
-            </div>
+          
 
             </div>
             <span class="closeBtn">x</span>

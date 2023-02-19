@@ -97,7 +97,8 @@ const createCar = (req, res) => {
 const saveNewCar = async (req, res) => {
   let { name, title, length, fuel, performance, price, filter, img, detailInfo } = req.body;
   var imgResult;
-cloudinary.config({
+  if(img) {
+    cloudinary.config({
   cloud_name: "ddxxozy4t",
   api_key: "842729965617165",
   api_secret: "YTxKzPr0nJXuorHAj0r8Kyrkg9U"
@@ -106,6 +107,8 @@ cloudinary.config({
 await cloudinary.uploader.upload(img, (error, result)=>{
    img = result.secure_url;
 });
+  }
+
   const car = await new Car({
     name,
     title,
