@@ -128,28 +128,24 @@ await cloudinary.uploader.upload(img, (error, result)=>{
 
   
 const listSingleCar = async(req,res) => { 
-   const carImg = await  Car.findOne({_id: req.params.id})
-   var arrImg = []
-   if(carImg) {
-    const a = carImg.detailInfo;
-    const regex = /<img[^>]+>/g;
-    const imgTags = a.match(regex);
-     imgTags.map((img) => {
-        var arr = []
-        const regex2 = /<img[^>]+src="([^">]+)"/g;
-        const matches = img.match(regex2);
-        const srcs = matches.map((match) => match.replace(/<img[^>]+src="|"/g, ''));
-        const srcStr = srcs.toString()
-        arr.push(srcStr)
-        arrImg.push(arr)
-        const imgResult = arrImg.flat(1)
-        imgResult.push(carImg.img);
-        return imgResult;
-     }) 
-   } else {
-     arrImg.push(carImg.img)
-     return arrImg;
-   }
+  const carImg = await  Car.findOne({_id: req.params.id})
+  const imgDetailInfo = carImg.detailInfo
+  const imgLineUp = carImg.img
+  let resultRepArr;
+  let resultNotDetailImg = []
+  if(imgDetailInfo) {
+     let regex = /src="(\S+)"/gm
+     let result = imgDetailInfo.match(regex) 
+     resultRepArr = result.map(str => str.replace(/src="|"$/g, ''));
+     if(imgLineUp) {
+      resultRepArr.push(imgLineUp)  
+     }
+     return resultRepArr;
+  } else {
+     resultNotDetailImg.push(imgLineUp)
+     return resultNotDetailImg;
+  }
+ 
    
 }
 
